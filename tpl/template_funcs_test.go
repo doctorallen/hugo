@@ -1792,3 +1792,15 @@ func TestBase64Encode(t *testing.T) {
 		t.Errorf("Base64Encode: got '%s', expected '%s'", result, testStr)
 	}
 }
+
+func TestRelativeTime(t *testing.T) {
+    now := time.Now().Unix()
+    future:= time.Unix(now+12, 0)
+    expected:= "12 seconds from now"
+
+    result := RelativeTime(future)
+
+    if result != expected {
+        t.Errorf("RelativeTime: got '%s', expected '%s'", result, expected)
+    }
+}

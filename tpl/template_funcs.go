@@ -34,6 +34,7 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/hugo/helpers"
 	jww "github.com/spf13/jwalterweatherman"
+    "github.com/dustin/go-humanize"
 )
 
 var funcMap template.FuncMap
@@ -1457,6 +1458,10 @@ func CountRunes(content interface{}) (int, error) {
 	return counter, nil
 }
 
+func RelativeTime(t time.Time) string {
+    return humanize.Time(t);
+}
+
 func init() {
 	funcMap = template.FuncMap{
 		"urlize":       helpers.URLize,
@@ -1521,6 +1526,7 @@ func init() {
 		"base64Encode": Base64Encode,
 		"countwords":   CountWords,
 		"countrunes":   CountRunes,
+        "relativeTime": RelativeTime,
 		"pluralize": func(in interface{}) (string, error) {
 			word, err := cast.ToStringE(in)
 			if err != nil {
